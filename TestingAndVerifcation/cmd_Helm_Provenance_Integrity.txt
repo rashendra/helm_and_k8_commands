@@ -1,0 +1,18 @@
+ gpg --gen-key
+ 
+ 
+ 
+ gpg --list-secret-keys
+ 
+ 
+ 
+ 
+ helm create signchartdemo
+ 
+ ls ~/.gnupg/
+ 
+ helm package --sign --key 'helmkeydemo' --keyring ~/.gnupg/secring.gpg signchartdemo
+
+helm package --sign --key 'id_rsa' --keyring  ~/.ssh/id_rsa ./signchartdemo
+ 
+helm verify signchartdemo-0.1.0.tgz

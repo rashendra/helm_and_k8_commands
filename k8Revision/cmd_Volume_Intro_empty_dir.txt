@@ -1,0 +1,45 @@
+minikube status
+
+kubectl apply -f volume_empty_dir.yaml
+
+~~~~~~~~~~~~~~~`
+volume_empty_dir.yaml
+~~~~~~~~~~~~~~~~~~
+apiVersion: v1
+kind: Pod
+metadata:
+  name: emptydir-test-pd
+spec:
+  containers:
+  - image: nginx
+    name: test-container
+    volumeMounts:
+    - mountPath: /cache
+      name: cache-volume
+  volumes:
+  - name: cache-volume
+    emptyDir: {}
+
+
+~~~~~~~~~~~~~
+
+scp -i ~/.ssh/rashendraaws2022key.pem  volume_empty_dir.yaml ec2-user@3.25.204.129:/home/ec2-user/
+
+
+kubectl get pods
+
+kubectl exec emptydir-test-pd df 
+
+kubectl exec -it emptydir-test-pd -- /bin/bash
+
+echo "empty dir test" >> empty_dir_test.txt
+
+echo "file1" >> file1.txt
+
+kubectl describe pod emptydir-test-pd
+# container id : docker://d62b2fe882f3d6affde1045c02d9aa88edcf6f180e6866b69c989713998047f6
+docker inspect ID d62b2fe882f3d6affde1045c02d9aa88edcf6f180e6866b69c989713998047f6
+
+cd /var/lib/kubelet/pods/156f280e-b951-4424-8516-d5c0539e3100/volumes/kubernetes.io~empty-dir/cache-volume
+
+kubectl delete pod emptydir-test-pd
