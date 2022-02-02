@@ -119,9 +119,9 @@ It should now be updated.
 
 ### Provision an EKS Cluster
 
-1.  Provision an EKS cluster with three worker nodes in `us-east-1`:
+1.  Provision an EKS cluster with three worker nodes in `us-east-1`:# This is to create a sample cluster ******
 
-        eksctl create cluster --name dev --version 1.16 --region us-east-1 --nodegroup-name standard-workers --node-type t3.micro --nodes 3 --nodes-min 1 --nodes-max 4 --managed
+        eksctl create cluster --name dev --version 1.19 --region us-east-1 --nodegroup-name standard-workers --node-type t3.micro --nodes 3 --nodes-min 1 --nodes-max 4 --managed
 
     It will take 10–15 minutes since it's provisioning the control plane and worker nodes, attaching the worker nodes to the control plane, and creating the VPC, security group, and Auto Scaling group.
 
