@@ -12,10 +12,6 @@ spec:
     metadata:
       labels:
         app: external-dns
-      # If you're using kiam or kube2iam, specify the following annotation.
-      # Otherwise, you may safely omit it.
-      annotations:
-        iam.amazonaws.com/role: arn:aws:iam::454771019145:role/k8-role
     spec:
       serviceAccountName: external-dns
       containers:
